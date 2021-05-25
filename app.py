@@ -13,7 +13,7 @@ import yfinance as yf
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
 from sklearn.preprocessing import MinMaxScaler
-from keras.models import load_model
+import tensorflow as tf
 from alpha_vantage.timeseries import TimeSeries
 
 #Constants to download data
@@ -341,7 +341,7 @@ def fore_open(n,value):
         X_test = np.reshape(X_test,(X_test.shape[0],X_test.shape[1],1))
 
         #Import & load the pickled model
-        model = load_model('LSTM1')
+        model = tf.keras.models.load_model('LSTM1')
 
         #Test/validate the model & inverse transoform to get the actual predictions
         pred = model.predict(X_test)
@@ -414,7 +414,7 @@ def fore_close(n, value):
         cl_X_test = np.reshape(cl_X_test, (cl_X_test.shape[0], cl_X_test.shape[1], 1))
 
         #Import & load the pickled model
-        model1 = load_model('LSTM1')
+        model1 = tf.keras.models.load_model('LSTM1')
 
         #Test/validate the model & inverse transoform to get the actual predictions
         fore = model1.predict(cl_X_test)
